@@ -13,6 +13,13 @@ Api para el seguimiento de los prestamos de un banco.
 
 ## Uso
 
+Acceso a la base de datos H2:
+
+- /console-h2
+- url: jdbc:h2:mem:challengeloan
+- username: banco
+- password: 
+
 ## Solicitud de préstamo
 
 Permite solicitar un prestamo.
@@ -41,6 +48,9 @@ Datos de salida:
 * loan_id: identificador único. 
 * installment: cuota mensual del préstamo.
 
+#### Posibles Estados
+- 400: Datos ingresados no validos
+- 500 Internal Server Error: error interno del proceso
 
 
 ## Lista de préstamos
@@ -71,6 +81,11 @@ Datos de Salida:
 * rate: tasa de interés (en formato decimal). 
 * date: cuando se solicitó el préstamo (fecha de origen como una cadena ISO 8601).
 
+#### Posibles Estados
+- 400: Datos ingresados no validos
+- 404 No Found: no existen prestamos en la base de datos
+- 500 Internal Server Error: error interno del proceso
+
 
 ## Registro de pagos realizados o no realizados
 
@@ -89,6 +104,13 @@ Datos de entrada:
 * payment_type: tipo de pago, made or missed. 
 * date: fecha del pago. 
 * amount: monto del pago realizado o no realizado.
+
+#### Posibles Estados
+- 400: Datos ingresados no validos
+- 404 No Found: no existen prestamos en la base de datos
+- 500 Internal Server Error: error interno del proceso
+
+
 
 ## Obtener la deuda
 
@@ -113,3 +135,8 @@ json
 ```
 Datos de Salida:
 * balance: valor de la deuda pendiente hasta la fecha especificada. 
+
+#### Posibles Estados
+- 400: Datos ingresados no validos
+- 404 No Found: no existen prestamos en la base de datos
+- 500 Internal Server Error: error interno del proceso
